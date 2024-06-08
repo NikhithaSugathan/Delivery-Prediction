@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 import pickle
 from sklearn.decomposition import PCA
 import sklearn
-import uuid
 
 print(sklearn.__version__)
 
@@ -29,7 +28,6 @@ def predict():
         try:
             trip_creation_time = datetime.now().strftime("%Y-%m-%dT%H:%M")
             print(trip_creation_time)
-            #trip_creation_time = request.form['trip_creation_time']
             source_states = request.form['source_states']
             source_cities = request.form['source_cities'].replace(' ', '_')
             destination_states = request.form['destination_states']
@@ -75,8 +73,7 @@ def predict():
 
             trip_id = f"{source_center}{destination_center}{new_datetime.strftime('%Y%m%d%H%M%S')}"
             return render_template('result.html', trip_id=trip_id, source_cities=source_cities, source_states=source_states, destination_cities=destination_cities, destination_states=destination_states, actual_time=eta, rout_type=rout_type, trip_creation_time=trip_creation_time)
-         
-            #return render_template('prediction.html', msg=eta)
+
         
         except Exception as e:
             print(f"Error: {e}")
